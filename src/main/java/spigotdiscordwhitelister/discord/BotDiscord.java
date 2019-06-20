@@ -11,7 +11,8 @@ import spigotdiscordwhitelister.spigot.*;
 
 public class BotDiscord extends ListenerAdapter {
     private final String REQUIRED_CHANNEL = "590920622457094172";
-    private final String REQUIRED_ROLE = "476550966657679370";
+    private final String WHITELISTER_ROLE = "476550966657679370";
+    private final String LOVELIE_ROLE = "472038003481509903";
     private BotPlugin plugin;
 
     // Initializes the bot
@@ -45,19 +46,25 @@ public class BotDiscord extends ListenerAdapter {
         switch (contentArr[0].toUpperCase()) {
             case "WHITELIST":
                 String currentChannel = event.getChannel().getId();
-                
-                if(currentChannel.equals(REQUIRED_CHANNEL)) {
-                    boolean hasPermission = false;
+                boolean isLovelie = false;
+                boolean isWhitelister = false;
 
-                    // If there are arguments checks if the user has the right role
-                    if(contentArr.length > 2) {
-                        for (Role r : event.getMember().getRoles()) {
-                            if(r.getId().equals(REQUIRED_ROLE)) {
-                                hasPermission = true;
-                                break;
-                            }
-                        }
+                for (Role r : event.getMember().getRoles()) {
+                    if(r.getId().equals(LOVELIE_ROLE)) {
+                        isLovelie = true;
                     }
+
+                    if(r.getId().equals(WHITELISTER_ROLE)) {
+                        isLovelie = true;
+                        isWhitelister = true;
+                        break;
+                    }
+                }
+
+                if(currentChannel.equals(REQUIRED_CHANNEL) && isLovelie) {
+                    // If there are arguments checks if the user has the right role
+                    boolean canAddRemove = false;
+                    if(contentArr.length > 2 && isWhitelister) canAddRemove = true;
 
                     String executingUser = event.getAuthor().getName();
                     String whitelistUser = event.getMember().getNickname();
@@ -65,7 +72,7 @@ public class BotDiscord extends ListenerAdapter {
                     boolean canExecute = true;
                     
                     // Changes data based on the arguments
-                    if(hasPermission) {
+                    if(canAddRemove) {
                         addremove = contentArr[1];
                         whitelistUser = contentArr[2];
                         if(!addremove.equals("add") && !addremove.equals("remove")) canExecute = false;
