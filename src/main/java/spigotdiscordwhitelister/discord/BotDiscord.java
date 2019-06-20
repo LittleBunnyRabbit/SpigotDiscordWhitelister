@@ -1,10 +1,13 @@
-package spigotdiscordwhitelister;
+package spigotdiscordwhitelister.discord;
 
 // JDK
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import net.dv8tion.jda.core.JDA;
+
+// Local
+import spigotdiscordwhitelister.spigot.*;
 
 public class BotDiscord extends ListenerAdapter {
     private final String REQUIRED_CHANNEL = "590920622457094172";

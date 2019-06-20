@@ -1,4 +1,4 @@
-package spigotdiscordwhitelister;
+package spigotdiscordwhitelister.spigot;
 
 // Bukkit
 import org.bukkit.Bukkit;
@@ -10,7 +10,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
+
 
 //JDA
 import net.dv8tion.jda.core.AccountType;
@@ -20,10 +20,13 @@ import net.dv8tion.jda.core.JDABuilder;
 // Default
 import javax.security.auth.login.LoginException;
 
+// Local
+import spigotdiscordwhitelister.discord.*;
+
 public class BotPlugin extends JavaPlugin {
 	private final String BOT_TOKEN = "NTg1ODgyNzAxNjU2MDk2ODI4.XPf8IA.zU5IECNpHIkDAFWRJlvICjGql_I";
 	private JDA jda;
-	private BotDiscord db;
+	private BotDiscord bd;
     private boolean autoWhitelist;
     private FileConfiguration config = this.getConfig();
 	
@@ -51,10 +54,10 @@ public class BotPlugin extends JavaPlugin {
 
 		// Run the discord bots
 		try {
-			db = new BotDiscord(this);
+			bd = new BotDiscord(this);
 			jda = new JDABuilder(AccountType.BOT)
 				      .setToken(BOT_TOKEN)
-		              .addEventListener(db)
+		              .addEventListener(bd)
 					  .buildBlocking();
 					  
 			System.out.println("[SpigotDiscordWhitelister]: Discord bot it running");
@@ -141,12 +144,6 @@ public class BotPlugin extends JavaPlugin {
 		}
 		return false;
 	}
-	
-
-	
-	public void playerChat(AsyncPlayerChatEvent event){
-		db.sendChatToDiscord(event.getMessage(), jda);
-	}
 
 	public void config() {
 		//TODO
@@ -164,3 +161,4 @@ public class BotPlugin extends JavaPlugin {
 		tellConsole("Plugin", ChatColor.GREEN + "Yehaw just executed: " + command);
 	}
 }
+

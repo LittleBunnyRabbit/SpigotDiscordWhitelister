@@ -1,4 +1,4 @@
-main: spigotdiscordwhitelister.BotPlugin
+main: spigotdiscordwhitelister.spigot.BotPlugin
 name: SpigotWhitelister
 version: 1.0
 authors:
