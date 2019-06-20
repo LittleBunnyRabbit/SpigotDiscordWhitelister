@@ -27,6 +27,7 @@ public class BotPlugin extends JavaPlugin {
 	private final String BOT_TOKEN = "NTg1ODgyNzAxNjU2MDk2ODI4.XPf8IA.zU5IECNpHIkDAFWRJlvICjGql_I";
 	private JDA jda;
 	private BotDiscord bd;
+	private McListener mcl;
     private boolean autoWhitelist;
     private FileConfiguration config = this.getConfig();
 	
@@ -69,6 +70,12 @@ public class BotPlugin extends JavaPlugin {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
+		}
+
+		try {
+			mcl = new McListener(this, bd, jda);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 	}
