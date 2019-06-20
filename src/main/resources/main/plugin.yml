@@ -1,0 +1,12 @@
+main: spigotdiscordwhitelister.BotPlugin
+name: SpigotWhitelister
+version: 1.0
+authors:
+  - LittleBunnyRabbit
+  - TheDutchMC
+description: Whitelister for Spigot 1.13.2, works with DiscordWhitelister
+commands:
+  sw:
+    description: General SW Command
+    usage: /sw <subcommand>
+    permission: spigotwhitelister.help

@@ -1,0 +1,9 @@
+#Spigot Plugin
+autoWhitelist: false
+
+
+#Discord bot token:
+botToken: ENTER TOKEN HERE
+
+#Role ID:
+roleId: ID HERE
